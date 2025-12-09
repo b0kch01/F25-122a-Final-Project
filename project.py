@@ -1,6 +1,7 @@
 #!./venv/bin/python
 
-from lib.commands import importData
+from lib.commands import import_data
+
 from lib.database import init_database
 from lib.parser import parse_args
 
@@ -11,7 +12,7 @@ def main(args):
 
     match args.function:
         case "import":
-            importData(db, args)
+            import_data.run(db, args)
 
 
 if __name__ == "__main__":

@@ -1,13 +1,12 @@
-import os
 import csv
-
+import os
 from mysql.connector.abstracts import MySQLConnectionAbstract
 from mysql.connector.pooling import PooledMySQLConnection
 
 from lib.database import reset_database
 
 
-def importData(db: PooledMySQLConnection | MySQLConnectionAbstract, args):
+def run(db: PooledMySQLConnection | MySQLConnectionAbstract, args):
     folder_name = args.folderName
 
     csv_files = []
