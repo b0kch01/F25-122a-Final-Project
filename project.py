@@ -1,5 +1,3 @@
-#!./venv/bin/python
-
 import sys
 
 raise Exception(str(sys.argv))
