@@ -12,9 +12,8 @@ load_dotenv()
 def init_database():
     db = mysql.connector.connect(
         host="localhost",
-        username="root",
+        user="root",
         password=os.environ["DB_PASSWORD"],
-        database="main",
     )
     return db
 

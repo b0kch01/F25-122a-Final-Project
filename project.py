@@ -1,6 +1,6 @@
 #!./venv/bin/python
 
-from lib.commands import import_data, top_n_duration_config, insert_agent_client, keyword_search
+from lib.commands import import_data, top_n_duration_config, insert_agent_client, keyword_search, add_customized_model
 
 from lib.database import init_database
 from lib.parser import parse_args
@@ -19,6 +19,8 @@ def main(args):
             insert_agent_client.run(db, args)
         case "listBaseModelKeyWord":
             keyword_search.run(db, args)
+        case "addCustomizedModel":
+            add_customized_model.run(db, args)
 
 
 if __name__ == "__main__":
