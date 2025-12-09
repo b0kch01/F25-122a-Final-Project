@@ -6,7 +6,7 @@ from lib.database import print_cursor
 
 def run(db: PooledMySQLConnection | MySQLConnectionAbstract, args):
     sql = """
-    SELECT c.client_uid, c.cid, c.label, c.content, mc.duration
+    SELECT c.client_uid, c.cid, c.labels, c.content, mc.duration
     FROM cs122a.ModelConfigurations mc 
     INNER JOIN cs122a.Configuration c ON c.cid = mc.cid
     WHERE c.client_uid = %s
