@@ -1,0 +1,75 @@
+NLquery_id,NLquery,LLM_model_name,prompt,LLM_returned_SQL_id,LLM_returned_SQL_query,SQL_correct,Incorrect_table_name,Incomplete_ISA,Forgets_Distinct
+1,"For each Internet Service(sid), find the most frequently used version among all Base Models that utilize it. If multiple versions have the same highest frequency, you may return any one of them.",ChatGPT 5.1 Instant,Translate this natural language query into SQL:,1,"SELECT t.sid, t.version
+FROM (
+    SELECT
+        bm.sid,
+        bm.version,
+        ROW_NUMBER() OVER (
+            PARTITION BY bm.sid
+            ORDER BY COUNT(*) DESC
+        ) AS rn
+    FROM BaseModels AS bm
+    GROUP BY bm.sid, bm.version
+) AS t
+WHERE t.rn = 1;",FALSE,TRUE,FALSE,TRUE
+2,Find all the Internet Service(sid) that are utilized by every Base Model built by the agent creator user_iuwrh,ChatGPT 5.1 Instant,Translate this natural language query into SQL:,1,"SELECT i.sid
+FROM InternetService i
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM BaseModel b
+    WHERE b.creator = 'user_iuwrh'
+      AND NOT EXISTS (
+          SELECT 1
+          FROM ModelInternetService mis
+          WHERE mis.base_model_id = b.id
+            AND mis.sid = i.sid
+      )
+);",FALSE,TRUE,TRUE,FALSE
+3,Find all customized models(mid) that do not appear in model configurations.,ChatGPT 5.1 Instant,Translate this natural language query into SQL:,1,"SELECT m.mid
+FROM customized_models AS m
+WHERE m.mid NOT IN (
+    SELECT mc.mid
+    FROM model_configurations AS mc
+);",TRUE,FALSE,FALSE,FALSE
+1,"For each Internet Service(sid), find the most frequently used version among all Base Models that utilize it. If multiple versions have the same highest frequency, you may return any one of them.",ChatGPT 5.1 Instant,"Translate this natural language query into SQL:
+SCHEMA:
+QUERY:",2,"SELECT ms.sid,
+       ms.version
+FROM ModelServices ms
+JOIN (
+    SELECT sid,
+           version,
+           ROW_NUMBER() OVER (
+               PARTITION BY sid
+               ORDER BY COUNT(*) DESC
+           ) AS rn
+    FROM ModelServices
+    GROUP BY sid, version
+) ranked
+  ON ranked.sid = ms.sid
+ AND ranked.version = ms.version
+WHERE ranked.rn = 1;",FALSE,FALSE,FALSE,TRUE
+2,Find all the Internet Service(sid) that are utilized by every Base Model built by the agent creator user_iuwrh,ChatGPT 5.1 Instant,"Translate this natural language query into SQL:
+SCHEMA:
+QUERY:",2,"SELECT ms.sid
+FROM Users u
+JOIN AgentCreator ac ON ac.uid = u.uid
+JOIN BaseModel bm ON bm.creator_uid = ac.uid
+JOIN ModelServices ms ON ms.bmid = bm.bmid
+WHERE u.username = 'user_iuwrh'
+GROUP BY ms.sid
+HAVING COUNT(DISTINCT bm.bmid) =
+       (
+         SELECT COUNT(*)
+         FROM Users u2
+         JOIN AgentCreator ac2 ON ac2.uid = u2.uid
+         JOIN BaseModel bm2 ON bm2.creator_uid = ac2.uid
+         WHERE u2.username = 'user_iuwrh'
+       );",FALSE,FALSE,TRUE,FALSE
+3,Find all customized models(mid) that do not appear in model configurations.,ChatGPT 5.1 Instant,"Translate this natural language query into SQL:
+SCHEMA:
+QUERY:",2,"SELECT cm.mid
+FROM CustomizedModel AS cm
+LEFT JOIN ModelConfigurations AS mc
+  ON cm.bmid = mc.bmid AND cm.mid = mc.mid
+WHERE mc.mid IS NULL;",TRUE,FALSE,FALSE,FALSE
