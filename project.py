@@ -7,12 +7,11 @@ from lib.parser import parse_args
 
 def main(args):
     args = parse_args()
-
-    init_database()
+    db = init_database()
 
     match args.function:
         case "import":
-            importData(args)
+            importData(db, args)
 
 
 if __name__ == "__main__":
