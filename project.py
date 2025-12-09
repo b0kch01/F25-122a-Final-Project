@@ -10,6 +10,7 @@ from lib.commands import (
     keyword_search,
     add_customized_model,
     delete_base_model,
+    list_internet_service
 )
 
 from lib.database import init_database
@@ -33,6 +34,8 @@ def main(args):
             add_customized_model.run(db, args)
         case "deleteBaseModel":
             delete_base_model.run(db, args)
+        case "listInternetService":
+            listInternetService.run(db, args)
         case "printNL2SQLresult":
             print_nl2sql_result.run()
 
