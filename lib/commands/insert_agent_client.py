@@ -43,9 +43,9 @@ def run(db: PooledMySQLConnection | MySQLConnectionAbstract, args):
         db.commit()
         print("Success")
 
-    except Error:
+    except Error e:
         db.rollback()
-        raise Error
+        raise e
         print("Fail")
 
     finally:
