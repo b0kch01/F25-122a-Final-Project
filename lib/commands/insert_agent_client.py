@@ -8,10 +8,11 @@ def run(db: PooledMySQLConnection | MySQLConnectionAbstract, args):
     try:
         cursor.execute(
             """
-        SELECT *
-        FROM cs122a.User
-        WHERE uid = %s AND email = %s AND username = %s
-        """
+            SELECT *
+            FROM cs122a.User
+            WHERE uid = %s AND email = %s AND username = %s;
+            """,
+            (args.uid, args.email, args.username),
         )
 
         if cursor.fetchone() is None:
