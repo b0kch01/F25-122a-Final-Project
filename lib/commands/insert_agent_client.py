@@ -6,14 +6,23 @@ from mysql.connector import Error
 def run(db: PooledMySQLConnection | MySQLConnectionAbstract, args):
     cursor = db.cursor()
     try:
-        # Insert into users
         cursor.execute(
             """
-            INSERT INTO cs122a.User (uid, email, username)
-            VALUES (%s, %s, %s)
-            """,
-            (args.uid, args.email, args.username),
+        SELECT *
+        FROM cs122a.User
+        WHERE uid = %s AND email = %s AND username = %s
+        """
         )
+
+        if cursor.fetchone() is None:
+            # Insert into users
+            cursor.execute(
+                """
+                INSERT INTO cs122a.User (uid, email, username)
+                VALUES (%s, %s, %s)
+                """,
+                (args.uid, args.email, args.username),
+            )
 
         # Insert into AgentClient
         cursor.execute(
@@ -43,9 +52,8 @@ def run(db: PooledMySQLConnection | MySQLConnectionAbstract, args):
         db.commit()
         print("Success")
 
-    except Error as e:
+    except Error:
         db.rollback()
-        raise e
         print("Fail")
 
     finally:
