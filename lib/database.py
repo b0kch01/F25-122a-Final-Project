@@ -1,10 +1,21 @@
+import os
+from dotenv import load_dotenv
+
 import mysql.connector
 from mysql.connector.abstracts import MySQLConnectionAbstract, MySQLCursorAbstract
 from mysql.connector.pooling import PooledMySQLConnection
 
 
+load_dotenv()
+
+
 def init_database():
-    db = mysql.connector.connect(host="localhost", username="root", password="Saleh578", database="main")
+    db = mysql.connector.connect(
+        host="localhost",
+        username="root",
+        password=os.environ["DB_PASSWORD"],
+        database="main",
+    )
     return db
 
 

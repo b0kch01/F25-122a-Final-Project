@@ -5,5 +5,5 @@
 5:
 6:
 7: DONE
-8: DOING
+8: DONE
 9:
