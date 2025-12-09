@@ -1,9 +1,11 @@
 import os
+from typing import Sequence
 from dotenv import load_dotenv
 
 import mysql.connector
 from mysql.connector.abstracts import MySQLConnectionAbstract, MySQLCursorAbstract
 from mysql.connector.pooling import PooledMySQLConnection
+from mysql.connector.types import RowType
 
 
 load_dotenv(".env.gradescope", override=True)
@@ -18,6 +20,15 @@ def init_database():
         password=os.environ["DB_PASSWORD"],
     )
     return db
+
+
+def print_cursor(cursor: MySQLCursorAbstract):
+    for row in cursor.fetchall():
+        for i, item in enumerate(row):
+            print(item, end="")
+            if i < len(row) - 1:
+                print(",", end="")
+        print()
 
 
 def reset_database(db: PooledMySQLConnection | MySQLConnectionAbstract):
