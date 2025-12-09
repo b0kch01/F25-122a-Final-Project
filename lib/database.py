@@ -4,7 +4,7 @@ from mysql.connector.pooling import PooledMySQLConnection
 
 
 def init_database():
-    db = mysql.connector.connect(host="localhost", username="root", password="12345678")
+    db = mysql.connector.connect(host="localhost", username="root", password="Saleh578", database="main")
     return db
 
 
