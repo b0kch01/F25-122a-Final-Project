@@ -6,13 +6,15 @@ from mysql.connector.abstracts import MySQLConnectionAbstract, MySQLCursorAbstra
 from mysql.connector.pooling import PooledMySQLConnection
 
 
-load_dotenv()
+load_dotenv(".env.gradescope", override=True)
+if os.path.exists(".env"):
+    load_dotenv(".env", override=True)
 
 
 def init_database():
     db = mysql.connector.connect(
         host="localhost",
-        user="root",
+        user=os.environ["DB_USER"],
         password=os.environ["DB_PASSWORD"],
     )
     return db

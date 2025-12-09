@@ -7,7 +7,7 @@ from lib.commands import (
     add_customized_model,
     delete_base_model,
     list_internet_service,
-    count_customized_model
+    count_customized_model,
 )
 
 from lib.database import init_database
