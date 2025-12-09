@@ -4,16 +4,16 @@ from mysql.connector.pooling import PooledMySQLConnection
 
 def run(db: PooledMySQLConnection | MySQLConnectionAbstract, args):
     sql = """
-    SELECT c.client_uid, c.cid , c.content, mc.duration
-    FROM main.ModelConfigurations mc 
-    INNER JOIN main.Configuration c ON c.cid = mc.cid
-    WHERE c.client_uid = %s
-    ORDER BY mc.duration DESC
-    LIMIT %s;
+    SELECT m.bmid, m.sid, i.provider, l.`domain` 
+    FROM main.LLMService l
+    JOIN main.InternetService i ON i.sid = l.sid 
+    JOIN main.ModelServices m ON m.sid = i.sid
+    WHERE l.`domain` LIKE %s
+    ORDER BY m.bmid;
     """
 
     with db.cursor() as cursor:
-        cursor.execute(sql, (args.uid, args.N))
+        cursor.execute(sql, (f"%{args.keyword}%",))
         print("\n".join(map(str, cursor.fetchall())))
 
     db.commit()

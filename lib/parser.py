@@ -57,10 +57,14 @@ def parse_args():
         "topNDurationConfig",
         help="Given an agent client id, list the top-N longest duration configurations with the longest duration managed by that client. Sorted in descending order.",
     )
-
     top_n_duration_parser.add_argument("uid", type=int)
     top_n_duration_parser.add_argument("N", type=int)
 
     # KEYWORD SEARCH
+    keyword_search_parser = function_subparser.add_parser(
+        "listBaseModelKeyWord",
+        help="List 5 base models that are utilizing LLM services whose domain contains the keyword, sorted by bmid in ascending order.",
+    )
+    keyword_search_parser.add_argument("keyword", type=str)
 
     return parser.parse_args()
