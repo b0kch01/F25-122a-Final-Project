@@ -68,7 +68,7 @@ def reset_database(db: PooledMySQLConnection | MySQLConnectionAbstract):
         interests TEXT NOT NULL,
         cardholder TEXT NOT NULL,
         expire DATE NOT NULL,
-        cardno INT NOT NULL,
+        cardno TEXT NOT NULL,
         cvv INT NOT NULL,
         zip INT NOT NULL,
         PRIMARY KEY (uid),
