@@ -4,9 +4,8 @@ from mysql.connector import Error
 
 
 def run(db: PooledMySQLConnection | MySQLConnectionAbstract, args):
+    cursor = db.cursor()
     try:
-        cursor = db.cursor()
-
         # Insert into users
         cursor.execute(
             """
@@ -46,6 +45,7 @@ def run(db: PooledMySQLConnection | MySQLConnectionAbstract, args):
 
     except Error:
         db.rollback()
+        raise Error
         print("Fail")
 
     finally:
