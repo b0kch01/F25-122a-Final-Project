@@ -1,7 +1,7 @@
 1: DONE
 2: DONE
-3: DOING
-4:
+3: DONE
+4: DOING
 5:
 6:
 7: DONE
