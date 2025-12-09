@@ -30,7 +30,7 @@ FROM customized_models AS m
 WHERE m.mid NOT IN (
     SELECT mc.mid
     FROM model_configurations AS mc
-);",TRUE,FALSE,FALSE,FALSE
+);",FALSE,TRUE,FALSE,FALSE
 1,"For each Internet Service(sid), find the most frequently used version among all Base Models that utilize it. If multiple versions have the same highest frequency, you may return any one of them.",ChatGPT 5.1 Instant,"Translate this natural language query into SQL:
 SCHEMA:
 QUERY:",2,"SELECT ms.sid,

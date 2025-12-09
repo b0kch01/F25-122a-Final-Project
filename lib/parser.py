@@ -67,4 +67,9 @@ def parse_args():
     )
     keyword_search_parser.add_argument("keyword", type=str)
 
+    # PRINT Q9 RESULTS
+    nl2q_parser = function_subparser.add_parser(
+        "printNL2SQLresult", help="Prints q9.csv table"
+    )
+
     return parser.parse_args()

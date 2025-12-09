@@ -2,6 +2,7 @@
 
 from lib.commands import (
     import_data,
+    print_nl2sql_result,
     top_n_duration_config,
     insert_agent_client,
     keyword_search,
@@ -30,6 +31,8 @@ def main(args):
             add_customized_model.run(db, args)
         case "deleteBaseModel":
             delete_base_model.run(db, args)
+        case "printNL2SQLresult":
+            print_nl2sql_result.run()
 
 
 if __name__ == "__main__":
