@@ -3,7 +3,7 @@
 3: DONE
 4: DONE
 5: DOING
-6:
+6: DOING
 7: DONE
 8: DONE
 9: DOING
