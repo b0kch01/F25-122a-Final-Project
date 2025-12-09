@@ -10,7 +10,8 @@ from lib.commands import (
     keyword_search,
     add_customized_model,
     delete_base_model,
-    list_internet_service
+    list_internet_service,
+    count_customized_model
 )
 
 from lib.database import init_database

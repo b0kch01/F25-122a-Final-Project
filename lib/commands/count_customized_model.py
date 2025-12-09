@@ -3,5 +3,20 @@ from mysql.connector.pooling import PooledMySQLConnection
 
 
 def run(db: PooledMySQLConnection | MySQLConnectionAbstract, args):
+    placeholders = ",".join(["%s"] * len(args.bmid_list))
 
+    sql = f"""
+    SELECT bm.bmid, bm.description, COUNT(cm.mid) AS customizedModelCount
+    FROM main.BaseModel bm
+    LEFT JOIN main.CustomizedModel cm ON bm.bmid = cm.bmid
+    WHERE bm.bmid IN ({placeholders})
+    GROUP BY bm.bmid, bm.description
+    ORDER BY bm.bmid ASC
+    """
+
+    with db.cursor() as cursor:
+        cursor.execute(sql, args.bmid_list)
+        print("\n".join(map(str, cursor.fetchall())))
+
+    db.commit()
 

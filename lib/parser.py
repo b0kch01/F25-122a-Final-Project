@@ -51,6 +51,11 @@ def parse_args():
     list_internet_services_parser.add_argument("bmid", type=int)
 
     # COUNT CUSTOMIZED MODEL
+    count_customized_model_parser = function_subparser.add_parser(
+        "countCustomizedModel",
+        help="Given a list of base model id, for each base moedl id, count on the numbers of customized models that build from it. Sorted by base model id in ascending order.", 
+    )
+    count_customized_model_parser.add_argument("bmid_list", type=int, nargs='+')
 
     # FIND TOP-N LONGEST DURATION CONFIGURATION
     top_n_duration_parser = function_subparser.add_parser(
