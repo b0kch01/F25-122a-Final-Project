@@ -1,7 +1,3 @@
-import sys
-
-raise Exception(str(sys.argv))
-
 from lib.commands import (
     import_data,
     print_nl2sql_result,

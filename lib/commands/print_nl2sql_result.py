@@ -1,5 +1,6 @@
 import csv
-from tabulate import tabulate
+
+# from tabulate import tabulate
 from textwrap import wrap
 
 CELL_WIDTH = 25
@@ -16,7 +17,9 @@ def wrap_items(row):
 def run():
     with open("q9.csv", "r") as file:
         reader = csv.reader(file)
-        rows = list(map(wrap_items, reader))
+        rows = list(map(str, reader))
         header, rows = rows[0], rows[1:]
 
-    print(tabulate(rows, headers=header, tablefmt="grid"))
+    print(header)
+    print("\n".join(rows))
+    # print(tabulate(rows, headers=header, tablefmt="grid"))
