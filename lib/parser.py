@@ -14,7 +14,7 @@ def parse_args():
     import_parser = function_subparser.add_parser(
         "import", help="Imports data in a given directory. Deletes existing tables."
     )
-    import_parser.add_argument("folder_name", type=str)
+    import_parser.add_argument("folderName", type=str)
 
     # INSERT AGENT
     insert_agent_parser = function_subparser.add_parser(
