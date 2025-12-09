@@ -40,7 +40,7 @@ def reset_database(db: PooledMySQLConnection | MySQLConnectionAbstract):
 
     cursor.execute(
         """
-    CREATE TABLE Users (
+    CREATE TABLE User (
         uid INT,
         email TEXT NOT NULL,
         username TEXT NOT NULL,
@@ -56,7 +56,7 @@ def reset_database(db: PooledMySQLConnection | MySQLConnectionAbstract):
         bio TEXT,
         payout TEXT,
         PRIMARY KEY (uid),
-        FOREIGN KEY (uid) REFERENCES Users(uid) ON DELETE CASCADE
+        FOREIGN KEY (uid) REFERENCES User(uid) ON DELETE CASCADE
     );
     """
     )
@@ -72,7 +72,7 @@ def reset_database(db: PooledMySQLConnection | MySQLConnectionAbstract):
         cvv INT NOT NULL,
         zip INT NOT NULL,
         PRIMARY KEY (uid),
-        FOREIGN KEY (uid) REFERENCES Users(uid) ON DELETE CASCADE
+        FOREIGN KEY (uid) REFERENCES User(uid) ON DELETE CASCADE
     );
     """
     )

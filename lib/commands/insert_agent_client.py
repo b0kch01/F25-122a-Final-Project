@@ -2,6 +2,7 @@ from mysql.connector.abstracts import MySQLConnectionAbstract
 from mysql.connector.pooling import PooledMySQLConnection
 from mysql.connector import Error
 
+
 def run(db: PooledMySQLConnection | MySQLConnectionAbstract, args):
     try:
         cursor = db.cursor()
@@ -9,14 +10,14 @@ def run(db: PooledMySQLConnection | MySQLConnectionAbstract, args):
         # Insert into users
         cursor.execute(
             """
-            INSERT INTO Users (uid, email, username)
+            INSERT INTO User (uid, email, username)
             VALUES (%s, %s, %s)
             """,
             (args.uid, args.email, args.username),
         )
 
         # Insert into AgentClient
-        cursor.execute (
+        cursor.execute(
             """
             INSERT INTO AgentClient (
                 uid,
@@ -42,10 +43,10 @@ def run(db: PooledMySQLConnection | MySQLConnectionAbstract, args):
 
         db.commit()
         print("Success")
-    
+
     except Error:
         db.rollback()
         print("Fail")
-    
+
     finally:
         cursor.close()

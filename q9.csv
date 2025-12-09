@@ -52,7 +52,7 @@ WHERE ranked.rn = 1;",FALSE,FALSE,FALSE,TRUE
 2,Find all the Internet Service(sid) that are utilized by every Base Model built by the agent creator user_iuwrh,ChatGPT 5.1 Instant,"Translate this natural language query into SQL:
 SCHEMA:
 QUERY:",2,"SELECT ms.sid
-FROM Users u
+FROM User u
 JOIN AgentCreator ac ON ac.uid = u.uid
 JOIN BaseModel bm ON bm.creator_uid = ac.uid
 JOIN ModelServices ms ON ms.bmid = bm.bmid
@@ -61,7 +61,7 @@ GROUP BY ms.sid
 HAVING COUNT(DISTINCT bm.bmid) =
        (
          SELECT COUNT(*)
-         FROM Users u2
+         FROM User u2
          JOIN AgentCreator ac2 ON ac2.uid = u2.uid
          JOIN BaseModel bm2 ON bm2.creator_uid = ac2.uid
          WHERE u2.username = 'user_iuwrh'
