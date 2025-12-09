@@ -1,6 +1,8 @@
 from mysql.connector.abstracts import MySQLConnectionAbstract
 from mysql.connector.pooling import PooledMySQLConnection
 
+from lib.database import print_cursor
+
 
 def run(db: PooledMySQLConnection | MySQLConnectionAbstract, args):
     placeholders = ",".join(["%s"] * len(args.bmid_list))
@@ -16,6 +18,6 @@ def run(db: PooledMySQLConnection | MySQLConnectionAbstract, args):
 
     with db.cursor() as cursor:
         cursor.execute(sql, args.bmid_list)
-        print("\n".join(map(str, cursor.fetchall())))
+        print_cursor(cursor)
 
     db.commit()
