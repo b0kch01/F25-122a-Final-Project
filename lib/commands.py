@@ -20,27 +20,21 @@ def importData(db: PooledMySQLConnection | MySQLConnectionAbstract, args):
     reset_database(db)
 
     cursor = db.cursor()
+    cursor.execute("SET FOREIGN_KEY_CHECKS = 0")
 
     for entry, file_path in csv_files:
         with open(file_path, "r") as file:
             reader = csv.reader(file)
             header = next(reader)
+            rows = list(reader)
 
-            try:
-                cursor.executemany(
-                    f"""
-                    INSERT INTO {entry} VALUES ({",".join(["?"]*len(header))})
-                    """,
-                    list(reader),
-                )
-            except:
-                print(
-                    f"""
-                    INSERT INTO {entry} VALUES ({",".join(["?"]*len(header))})
-                    """
-                )
-                print(header, csv_files)
-                return
+            cursor.executemany(
+                f"""
+                INSERT INTO {entry} VALUES ({",".join(["%s"]*len(header))});
+                """,
+                rows,
+            )
 
+    cursor.execute("SET FOREIGN_KEY_CHECKS = 1")
     cursor.close()
     db.commit()
