@@ -52,4 +52,15 @@ def parse_args():
 
     # COUNT CUSTOMIZED MODEL
 
+    # FIND TOP-N LONGEST DURATION CONFIGURATION
+    top_n_duration_parser = function_subparser.add_parser(
+        "topNDurationConfig",
+        help="Given an agent client id, list the top-N longest duration configurations with the longest duration managed by that client. Sorted in descending order.",
+    )
+
+    top_n_duration_parser.add_argument("uid", type=int)
+    top_n_duration_parser.add_argument("N", type=int)
+
+    # KEYWORD SEARCH
+
     return parser.parse_args()

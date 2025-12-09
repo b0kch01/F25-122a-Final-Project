@@ -11,9 +11,9 @@ def init_database():
 def reset_database(db: PooledMySQLConnection | MySQLConnectionAbstract):
     cursor = db.cursor()
 
-    cursor.execute("DROP DATABASE IF EXISTS `122a`;")
-    cursor.execute("CREATE DATABASE `122a`;")
-    cursor.execute("USE `122a`;")
+    cursor.execute("DROP DATABASE IF EXISTS `main`;")
+    cursor.execute("CREATE DATABASE `main`;")
+    cursor.execute("USE `main`;")
 
     cursor.execute(
         """

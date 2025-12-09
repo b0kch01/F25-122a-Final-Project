@@ -1,6 +1,6 @@
 #!./venv/bin/python
 
-from lib.commands import import_data
+from lib.commands import import_data, top_n_duration_config
 
 from lib.database import init_database
 from lib.parser import parse_args
@@ -13,6 +13,8 @@ def main(args):
     match args.function:
         case "import":
             import_data.run(db, args)
+        case "topNDurationConfig":
+            top_n_duration_config.run(db, args)
 
 
 if __name__ == "__main__":
