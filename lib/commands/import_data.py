@@ -3,7 +3,7 @@ import os
 from mysql.connector.abstracts import MySQLConnectionAbstract
 from mysql.connector.pooling import PooledMySQLConnection
 
-from lib.database import reset_database
+from ..database import reset_database
 
 
 def run(db: PooledMySQLConnection | MySQLConnectionAbstract, args):
