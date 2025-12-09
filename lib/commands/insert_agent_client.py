@@ -9,7 +9,7 @@ def run(db: PooledMySQLConnection | MySQLConnectionAbstract, args):
         # Insert into users
         cursor.execute(
             """
-            INSERT INTO User (uid, email, username)
+            INSERT INTO cs122a.User (uid, email, username)
             VALUES (%s, %s, %s)
             """,
             (args.uid, args.email, args.username),
@@ -18,7 +18,7 @@ def run(db: PooledMySQLConnection | MySQLConnectionAbstract, args):
         # Insert into AgentClient
         cursor.execute(
             """
-            INSERT INTO AgentClient (
+            INSERT INTO cs122a.AgentClient (
                 uid,
                 interests,
                 cardholder,
