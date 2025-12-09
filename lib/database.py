@@ -12,10 +12,10 @@ def reset_database(db: PooledMySQLConnection | MySQLConnectionAbstract):
     with db.cursor() as cursor:
         cursor.execute(
             """
-        DROP DATABASE IF EXISTS '122a';
-        CREATE DATABASE '122a';
+        DROP DATABASE IF EXISTS 122a;
+        CREATE DATABASE 122a;
 
-        USE '122a';
+        USE 122a;
 
         CREATE TABLE Users (
             uid INT,
@@ -111,5 +111,3 @@ def reset_database(db: PooledMySQLConnection | MySQLConnectionAbstract):
         );
         """
         )
-
-    db.commit()
