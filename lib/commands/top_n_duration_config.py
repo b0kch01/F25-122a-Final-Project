@@ -6,12 +6,13 @@ from lib.database import print_cursor
 
 def run(db: PooledMySQLConnection | MySQLConnectionAbstract, args):
     sql = """
-    SELECT a.uid, c.cid, c.labels, c.content, mc.duration
+    SELECT a.uid, mc.cid, c.labels, c.content, MAX(mc.duration)
     FROM cs122a.ModelConfigurations mc 
     INNER JOIN cs122a.Configuration c ON c.cid = mc.cid
     INNER JOIN cs122a.AgentClient a ON a.uid = c.client_uid
     WHERE a.uid = %s
-    ORDER BY mc.duration DESC
+    GROUP BY mc.cid
+    ORDER BY MAX(mc.duration) DESC
     LIMIT %s;
     """
 
