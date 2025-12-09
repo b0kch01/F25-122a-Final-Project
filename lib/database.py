@@ -24,9 +24,9 @@ def init_database():
 
 def print_cursor(cursor: MySQLCursorAbstract):
     for row in cursor.fetchall():
-        for i, item in enumerate(row):
+        for col_i, item in enumerate(row):
             print(item, end="")
-            if i < len(row) - 1:
+            if col_i < len(row) - 1:
                 print(",", end="")
         print()
 
