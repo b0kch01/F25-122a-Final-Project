@@ -7,8 +7,8 @@ def run(db: PooledMySQLConnection | MySQLConnectionAbstract, args):
 
     sql = f"""
     SELECT bm.bmid, bm.description, COUNT(cm.mid) AS customizedModelCount
-    FROM main.BaseModel bm
-    LEFT JOIN main.CustomizedModel cm ON bm.bmid = cm.bmid
+    FROM cs122a.BaseModel bm
+    LEFT JOIN cs122a.CustomizedModel cm ON bm.bmid = cm.bmid
     WHERE bm.bmid IN ({placeholders})
     GROUP BY bm.bmid, bm.description
     ORDER BY bm.bmid ASC
@@ -19,4 +19,3 @@ def run(db: PooledMySQLConnection | MySQLConnectionAbstract, args):
         print("\n".join(map(str, cursor.fetchall())))
 
     db.commit()
-

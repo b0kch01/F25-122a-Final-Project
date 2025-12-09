@@ -5,8 +5,8 @@ from mysql.connector.pooling import PooledMySQLConnection
 def run(db: PooledMySQLConnection | MySQLConnectionAbstract, args):
     sql = """
     SELECT c.client_uid, c.cid , c.content, mc.duration
-    FROM main.ModelConfigurations mc 
-    INNER JOIN main.Configuration c ON c.cid = mc.cid
+    FROM cs122a.ModelConfigurations mc 
+    INNER JOIN cs122a.Configuration c ON c.cid = mc.cid
     WHERE c.client_uid = %s
     ORDER BY mc.duration DESC
     LIMIT %s;

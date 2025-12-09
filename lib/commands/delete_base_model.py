@@ -4,11 +4,12 @@ from mysql.connector import Error
 
 
 def run(db: PooledMySQLConnection | MySQLConnectionAbstract, args):
-    try:
-        cursor = db.cursor()
-        cursor.execute("USE main;")
+    cursor = db.cursor()
 
-        cursor.execute (
+    try:
+        cursor.execute("USE cs122a;")
+
+        cursor.execute(
             """
             DELETE FROM BaseModel WHERE bmid = %s
             """,
@@ -21,11 +22,12 @@ def run(db: PooledMySQLConnection | MySQLConnectionAbstract, args):
         else:
             db.commit()
             print("Success")
-    
+
     except Error as e:
         db.rollback()
         print("Fail")
         print(e)
-    
+
     finally:
         cursor.close()
+

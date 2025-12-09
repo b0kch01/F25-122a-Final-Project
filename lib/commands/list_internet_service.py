@@ -5,8 +5,8 @@ from mysql.connector.pooling import PooledMySQLConnection
 def run(db: PooledMySQLConnection | MySQLConnectionAbstract, args):
     sql = """
     SELECT s.sid, s.endpoints, s.provider
-    FROM main.InternetService s
-    JOIN main.ModelServices ms ON ms.sid = s.sid
+    FROM cs122a.InternetService s
+    JOIN cs122a.ModelServices ms ON ms.sid = s.sid
     WHERE ms.bmid = %s
     ORDER BY s.provider ASC
     """
