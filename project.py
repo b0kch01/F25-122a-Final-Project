@@ -35,7 +35,9 @@ def main(args):
         case "deleteBaseModel":
             delete_base_model.run(db, args)
         case "listInternetService":
-            listInternetService.run(db, args)
+            list_internet_service.run(db, args)
+        case "countCustomizedModel":
+            count_customized_model.run(db, args)
         case "printNL2SQLresult":
             print_nl2sql_result.run()
 
